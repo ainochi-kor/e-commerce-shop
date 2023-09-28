@@ -5,7 +5,9 @@ import Loading from "@/components/loading/Loading";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { loginClientStylePage } from "./loginClient.css";
+import loginClientStyle from "./loginClient.css";
+import AutoSignInCheckbox from "@/components/autoSignInCheckbox/AutoSignInCheckbox";
+import Divider from "@/components/divider/Divider";
 
 const LoginClient: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -28,8 +30,8 @@ const LoginClient: React.FC = () => {
 
   return (
     <>
-      {<Loading />}
-      <section className={loginClientStylePage}>
+      {isLoading && <Loading />}
+      <section className={loginClientStyle.page}>
         <div>
           <h1>
             <Image
@@ -39,11 +41,45 @@ const LoginClient: React.FC = () => {
               height={56}
             />
           </h1>
-          <form onSubmit={handleSubmitLoginUser}>
-            <Input />
-            <div>자동 로그인, 비밀번호 수정</div>
+          <form
+            className={loginClientStyle.form}
+            onSubmit={handleSubmitLoginUser}
+          >
+            <Input
+              email
+              icon="letter"
+              id="email"
+              name="email"
+              label="이메일"
+              placeholder="아이디(이메일)"
+              className={loginClientStyle.control}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+
+            <Input
+              password
+              icon="lock"
+              id="password"
+              name="password"
+              label="비밀번호"
+              placeholder="비밀번호"
+              className={loginClientStyle.control}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <div>
+              <AutoSignInCheckbox
+                checked={isAutoLogin}
+                onChange={(e) => setIsAutoLogin(e.target.checked)}
+              />
+            </div>
             <div>
               <Button />
+              <Divider />
+              <Button />
+              <Divider />
+
               <div>
                 <Button />
               </div>
