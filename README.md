@@ -8,7 +8,6 @@
 - react 18.2
 - typescript 5.2
 - vanilla-extract 1.13
-
 - @emailjs/browser : email 모듈
 - @reduxjs/toolkit : redux 모듈
 - @tosspayments/payment-sdk : 결제 모듈
