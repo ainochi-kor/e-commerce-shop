@@ -1,8 +1,9 @@
 import { NextPage } from "next";
-import React from "react";
+import React, { useState } from "react";
+import LoginClient from "./LoginClient";
 
 const LoginPage: NextPage = () => {
-  return <div>Login</div>;
+  return <LoginClient />;
 };
 
 export default LoginPage;
