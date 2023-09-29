@@ -1,7 +1,9 @@
 import { NextPage } from "next";
+import { useState } from "react";
+import RegisterClient from "./RegisterClient";
 
 const RegisterPage: NextPage = () => {
-  return <div>page</div>;
+  return <RegisterClient />;
 };
 
 export default RegisterPage;

@@ -7,6 +7,11 @@ const loginClientStyle = {
     display: "grid",
     placeItems: "center",
   }),
+  header: style({
+    paddingBottom: 20,
+    display: "grid",
+    placeItems: "center",
+  }),
   container: style({
     width: 576,
   }),

@@ -1,40 +1,33 @@
 "use client";
-import Button from "@/components/button/Button";
-import Input from "@/components/input/Input";
 import Loading from "@/components/loading/Loading";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import loginClientStyle from "./loginClient.css";
-import AutoSignInCheckbox from "@/components/autoSignInCheckbox/AutoSignInCheckbox";
-import Divider from "@/components/divider/Divider";
+import loginClientStyle from "../login/loginClient.css";
+import Image from "next/image";
+import Input from "@/components/input/Input";
+import Button from "@/components/button/Button";
 import Link from "next/link";
+import Divider from "@/components/divider/Divider";
 
-const LoginClient: React.FC = () => {
+const RegisterClient: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [isAutoLogin, setIsAutoLogin] = useState(false);
 
   const router = useRouter();
 
-  const handleClickRedirectUser = () => {
-    router.push("/");
-  };
-
-  const handleSubmitLoginUser = (e: React.FormEvent) => {
+  const handleSubmitRegisterUser = (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
   };
-
-  const signInWithGoogleLogin = () => {};
 
   return (
     <>
       {isLoading && <Loading />}
       <section className={loginClientStyle.page}>
         <div>
-          <h1>
+          <h1 className={loginClientStyle.header}>
             <Image
               src={"/images/colorful.svg"}
               alt="logo"
@@ -44,7 +37,7 @@ const LoginClient: React.FC = () => {
           </h1>
           <form
             className={loginClientStyle.form}
-            onSubmit={handleSubmitLoginUser}
+            onSubmit={handleSubmitRegisterUser}
           >
             <Input
               email
@@ -57,7 +50,6 @@ const LoginClient: React.FC = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-
             <Input
               password
               icon="lock"
@@ -69,38 +61,29 @@ const LoginClient: React.FC = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <div className={loginClientStyle.group}>
-              <AutoSignInCheckbox
-                checked={isAutoLogin}
-                onChange={(e) => setIsAutoLogin(e.target.checked)}
-              />
-              <Link href={"/reset"} className={loginClientStyle.findLink}>
-                비밀번호 수정하기
-                <Image
-                  src={"images/arrow.svg"}
-                  alt="비밀번호 수정하기로 이동"
-                  width={11}
-                  height={18}
-                  className={loginClientStyle.findLinkArrow}
-                />
-              </Link>
-            </div>
+            <Input
+              password
+              icon="lock"
+              id="password"
+              name="password"
+              label="비밀번호 확인"
+              placeholder="비밀번호 확인"
+              className={loginClientStyle.control}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+
             <div>
               <Button type="submit" width="100%">
-                로그인
+                회원가입
               </Button>
               <Divider />
 
-              <Link href={"/register"}>
-                <Button secondary width="100%">
-                  회원가입
+              <Link href={"/login"}>
+                <Button secondary width={"100%"}>
+                  로그인
                 </Button>
               </Link>
-              <Divider />
-
-              <div>
-                <Button onClick={signInWithGoogleLogin}>구글 로그인</Button>
-              </div>
             </div>
           </form>
         </div>
@@ -109,4 +92,4 @@ const LoginClient: React.FC = () => {
   );
 };
 
-export default LoginClient;
+export default RegisterClient;

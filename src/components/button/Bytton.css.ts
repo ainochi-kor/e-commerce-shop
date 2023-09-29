@@ -3,6 +3,7 @@ import { style } from "@vanilla-extract/css";
 
 const buttonStyle = {
   button: style({
+    cursor: "pointer",
     boxSizing: "border-box",
     display: "inline-flex",
     justifyContent: "center",
