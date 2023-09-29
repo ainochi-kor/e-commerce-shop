@@ -115,25 +115,25 @@ const footerStyle = {
   }),
 };
 
-globalStyle(".customerGuideList > li", {
+globalStyle(`${footerStyle.customerGuideList} > li`, {
   display: "flex",
   flexFlow: "row nowrap",
   alignItems: "center",
 });
 
-globalStyle(".customerGuideList > li > span", {
+globalStyle(`${footerStyle.customerGuideList} > li > span`, {
   display: "inline-block",
   width: "0.1rem",
   height: "1.2rem",
 });
 
-globalStyle(".customerGuideList > li > a", {
+globalStyle(`${footerStyle.customerGuideList} > li > a`, {
   display: "flex",
   flexFlow: "row nowrap",
   alignItems: "center",
 });
 
-globalStyle(".coupangInformationList > li:not(:first-child)", {
+globalStyle(`${footerStyle.coupangInformationList} > li:not(:first-child)`, {
   lineHeight: 1.2,
   marginTop: "1.2rem",
 });
