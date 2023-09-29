@@ -10,3 +10,5 @@ export const colors = {
   "dark-blue": "#0a1930",
   "dark-gray": "#767676",
 };
+
+export const boxShadow = "0 1px 3px rgba(0,0,0,0.25)";

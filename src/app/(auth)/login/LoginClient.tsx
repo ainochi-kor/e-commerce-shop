@@ -8,6 +8,7 @@ import React, { useState } from "react";
 import loginClientStyle from "./loginClient.css";
 import AutoSignInCheckbox from "@/components/autoSignInCheckbox/AutoSignInCheckbox";
 import Divider from "@/components/divider/Divider";
+import Link from "next/link";
 
 const LoginClient: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -75,13 +76,17 @@ const LoginClient: React.FC = () => {
               />
             </div>
             <div>
-              <Button />
+              <Button type="submit" width="100%">
+                로그인
+              </Button>
               <Divider />
-              <Button />
+              <Button>
+                <Link href={"/register"}>회원가입</Link>
+              </Button>
               <Divider />
 
               <div>
-                <Button />
+                <Button onClick={signInWithGoogleLogin}>구글 로그인</Button>
               </div>
             </div>
           </form>

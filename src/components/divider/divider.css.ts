@@ -1,4 +1,4 @@
-import { colors } from "@/styles/color";
+import { colors } from "@/styles/utils";
 import { style } from "@vanilla-extract/css";
 
 const dividerStyle = {
