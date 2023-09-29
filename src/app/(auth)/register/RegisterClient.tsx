@@ -8,6 +8,9 @@ import Input from "@/components/input/Input";
 import Button from "@/components/button/Button";
 import Link from "next/link";
 import Divider from "@/components/divider/Divider";
+import { toast } from "react-toastify";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/firebase/firebase";
 
 const RegisterClient: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -19,7 +22,23 @@ const RegisterClient: React.FC = () => {
 
   const handleSubmitRegisterUser = (e: React.FormEvent) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      toast.error("비밀번호");
+    }
     setIsLoading(true);
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // const user = userCredential.user;
+        toast.success("회원 가입 성공");
+        router.push("/login");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
