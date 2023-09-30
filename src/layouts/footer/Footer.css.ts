@@ -17,7 +17,7 @@ const footerStyle = {
     display: "flex",
     flexFlow: "row nowrap",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-evenly",
     listStyle: "none",
     height: "4rem",
     paddingLeft: 0,
@@ -117,7 +117,7 @@ const footerStyle = {
 
 globalStyle(`${footerStyle.customerGuideList} > li`, {
   display: "flex",
-  flexFlow: "row nowrap",
+  whiteSpace: "nowrap",
   alignItems: "center",
 });
 

@@ -28,7 +28,7 @@ const innerHeaderStyle = {
     color: colors.white,
     width: "11rem",
     height: "11.6rem",
-    background: `${colors.primary} url(/public/images/hamburger.svg) no-repeat 50% 3rem`,
+    background: `${colors.primary} url(/images/hamburger.svg) no-repeat 50% 3rem`,
   }),
   searchForm: style({
     gridArea: "searchForm",
@@ -64,8 +64,7 @@ const innerHeaderStyle = {
     height: "3rem",
     marginRight: "1rem",
     order: 1,
-    background:
-      "-moz-initialurl('/public/images/search.svg') no-repeat 50% 50%",
+    background: "url('/images/search.svg') no-repeat 50% 50%",
   }),
   voiceSearchButton: style({
     border: "0",
@@ -73,7 +72,7 @@ const innerHeaderStyle = {
     width: "3rem",
     height: "3rem",
     marginRight: "1rem",
-    background: "-moz-initialurl('/public/images/mic.svg') no-repeat 50% 50%",
+    background: "url('/images/mic.svg') no-repeat 50% 50%",
   }),
   myCoupang: style({
     position: "relative",
@@ -93,8 +92,7 @@ const innerHeaderStyle = {
   myCoupangButton: style({
     width: "5rem",
     height: "6rem",
-    background:
-      "transparent url(/public/images/my-coupang.svg) no-repeat 50% 0.5rem",
+    background: "transparent url(/images/my-coupang.svg) no-repeat 50% 0.5rem",
     padding: "3rem 0 0 0",
   }),
   myCoupangList: style({
@@ -146,7 +144,7 @@ const innerHeaderStyle = {
     width: "5rem",
     height: "6rem",
     padding: "3rem 0 0 0",
-    background: "url(/public/images/cart.svg) no-repeat 50% 0.5rem",
+    background: "url(/images/cart.svg) no-repeat 50% 0.5rem",
   }),
   cartProductCount: style({
     position: "absolute",

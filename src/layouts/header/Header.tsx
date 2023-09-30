@@ -8,10 +8,13 @@ import { auth } from "@/firebase/firebase";
 import { toast } from "react-toastify";
 import { usePathname, useRouter } from "next/navigation";
 import InnerHeader from "../innderHeader/InnerHeader";
+import { useDispatch } from "react-redux";
+import { REMOVE_ACTIVE_USER, SET_ACTIVE_USER } from "@/redux/slice/authSlice";
 
 const Header: React.FC = () => {
   const router = useRouter();
   const pathname = usePathname();
+  const dispatch = useDispatch();
   const [displayName, setDisplayName] = useState("");
 
   const handleClickLogoutUser = (e: MouseEvent<HTMLAnchorElement>) => {
@@ -28,21 +31,32 @@ const Header: React.FC = () => {
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
+      let userName = "";
       if (user) {
         if (user.displayName === null) {
           const ul = user.email?.split("@")[0];
           if (ul) {
             const uName = ul.charAt(0).toUpperCase() + ul.slice(1);
             setDisplayName(uName);
+            userName = uName;
           }
         } else {
           setDisplayName(user.displayName);
+          userName = user.displayName;
         }
+        dispatch(
+          SET_ACTIVE_USER({
+            email: user.email,
+            userName,
+            userID: user.uid,
+          })
+        );
       } else {
         setDisplayName("");
+        dispatch(REMOVE_ACTIVE_USER());
       }
     });
-  }, []);
+  }, [dispatch]);
 
   if (["/login", "/register", "/reset"].includes(pathname)) {
     return null;
