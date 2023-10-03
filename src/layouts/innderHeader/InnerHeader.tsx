@@ -5,19 +5,21 @@ import Image from "next/image";
 import classNames from "classnames";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
+import { FILTER_BY_SEARCH } from "@/redux/slice/filterSlice";
+import { selectProducts } from "@/redux/slice/productSlice";
 
 const InnerHeader: React.FC = () => {
   const router = useRouter();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   //dispatching actions
   const [search, setSearch] = useState("");
 
-  const products = ""; // useSelector(selectProducts);
+  const products = useSelector(selectProducts);
   const cartTotalQuantity = ""; // useSelector(selectCartTotalQuantity);
 
-  // useEffect(() => {
-  //    dispatch(FILTER_BY_SEARCH({ products, search }));
-  // }, [dispatch, products, search]);
+  useEffect(() => {
+    dispatch(FILTER_BY_SEARCH({ products, search }));
+  }, [dispatch, products, search]);
 
   const handleClick = () => {
     router.push("/cart");
