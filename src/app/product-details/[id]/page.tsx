@@ -1,5 +1,6 @@
 import { NextPage } from "next";
 import React from "react";
+import ProductDetailsClient from "../ProductDetailsClient";
 
 interface ProductDetailsPageProps {
   params: {
@@ -10,7 +11,7 @@ interface ProductDetailsPageProps {
 const ProductDetailsPage: NextPage<ProductDetailsPageProps> = ({
   params: { id },
 }) => {
-  return <div>ProductDetailsPage {id}</div>;
+  return <ProductDetailsClient />;
 };
 
 export default ProductDetailsPage;
