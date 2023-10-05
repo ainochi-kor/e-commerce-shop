@@ -11,8 +11,11 @@ import priceFormat from "@/utils/priceFormat";
 import Button from "@/components/button/Button";
 import ProductReviewItem from "@/components/product/productReviewItem/ProductReviewItem";
 import useFetchDocuments from "@/hooks/useFetchDocuments";
+import { useDispatch } from "react-redux";
+import { ADD_TO_CART, CALCULATE_TOTAL_QUANTITY } from "@/redux/slice/cartSlice";
 
 const ProductDetailsClient = () => {
+  const dispatch = useDispatch();
   const { id } = useParams();
   const { document: product } = useFetchDocument("products", id as string);
   const { documents: reviews } = useFetchDocuments("reviews", [
@@ -23,7 +26,10 @@ const ProductDetailsClient = () => {
 
   const [count, setCount] = useState(1);
 
-  const addToCart = () => {};
+  const addToCart = () => {
+    dispatch(ADD_TO_CART({ ...product, quantity: count }));
+    dispatch(CALCULATE_TOTAL_QUANTITY());
+  };
 
   const today = new Date();
   const tomorrow = new Date(today.setDate(today.getDate() + 1));
@@ -146,14 +152,14 @@ const ProductDetailsClient = () => {
             </p>
           ) : (
             <>
-              {reviews.map((item) => {
+              {reviews.map(({ id, rate, review, reviewDate, userName }) => {
                 return (
                   <ProductReviewItem
-                    key={item.id}
-                    rate={item.rate}
-                    review={item.review}
-                    reviewDate={item.reviewDate}
-                    userName={item.userName}
+                    key={id}
+                    rate={rate}
+                    review={review}
+                    reviewDate={reviewDate}
+                    userName={userName}
                   />
                 );
               })}

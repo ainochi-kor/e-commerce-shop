@@ -1,8 +1,9 @@
 import { NextPage } from "next";
 import React from "react";
+import CheckoutAddressClient from "./CheckoutAddressClient";
 
 const CheckoutAddressPage: NextPage = () => {
-  return <div>CheckoutAddressPage</div>;
+  return <CheckoutAddressClient />;
 };
 
 export default CheckoutAddressPage;
