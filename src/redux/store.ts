@@ -3,6 +3,7 @@ import productReducer from "./slice/productSlice";
 import filterReducer from "./slice/filterSlice";
 import cartReducer from "./slice/cartSlice";
 import checkoutReducer from "./slice/checkoutSlice";
+import orderReducer from "./slice/orderSlice";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
 const rootReducer = combineReducers({
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   filter: filterReducer,
   cart: cartReducer,
   checkout: checkoutReducer,
+  order: orderReducer,
 });
 
 const store = configureStore({

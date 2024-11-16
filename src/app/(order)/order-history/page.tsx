@@ -1,8 +1,9 @@
 import { NextPage } from "next";
 import React from "react";
+import OrderHistoryClient from "./OrderHistoryClient";
 
 const OrderHistoryPage: NextPage = () => {
-  return <div>OrderHistoryPage</div>;
+  return <OrderHistoryClient />;
 };
 
 export default OrderHistoryPage;
