@@ -3,11 +3,7 @@ import productReducer from "./slice/productSlice";
 import filterReducer from "./slice/filterSlice";
 import cartReducer from "./slice/cartSlice";
 import checkoutReducer from "./slice/checkoutSlice";
-import {
-  combineReducers,
-  configureStore,
-  getDefaultMiddleware,
-} from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -19,9 +15,10 @@ const rootReducer = combineReducers({
 
 const store = configureStore({
   reducer: rootReducer,
-  middleware: getDefaultMiddleware({
-    serializableCheck: false,
-  }),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 export type ReduxState = ReturnType<typeof store.getState>;
