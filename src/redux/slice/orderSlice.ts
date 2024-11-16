@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { Order } from "@/types/products.type";
 
-const initialState = {
+const initialState: {
+  orderHistory: Order[];
+  totalOrderAmount: null;
+} = {
   orderHistory: [],
   totalOrderAmount: null,
 };
@@ -17,7 +21,8 @@ const orderSlice = createSlice({
 
 export const { STORE_ORDERS } = orderSlice.actions;
 
-export const selectOrderHistory = (state: { orders: typeof initialState }) =>
-  state.orders.orderHistory;
+export const selectOrderHistory = (state: { orders: typeof initialState }) => {
+  return state.orders.orderHistory;
+};
 
 export default orderSlice.reducer;
