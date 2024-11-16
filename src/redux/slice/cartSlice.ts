@@ -4,7 +4,7 @@ import { stat } from "fs";
 import { toast } from "react-toastify";
 import { ReduxState } from "../store";
 
-interface CartState {
+export interface CartState {
   cartItems: CartItem[];
   cartTotalQuantity: number;
   cartTotalAmount: number;

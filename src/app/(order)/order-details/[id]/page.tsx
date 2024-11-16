@@ -1,5 +1,6 @@
 import { NextPage } from "next";
 import React from "react";
+import OrderDetailClient from "./OrderDetailsClient";
 
 interface OrderDetailsPageProps {
   params: {
@@ -14,11 +15,7 @@ const OrderDetailsPage: NextPage<OrderDetailsPageProps> = ({
   params: { id },
   searchParams: { hello },
 }) => {
-  return (
-    <div>
-      {id} {hello}
-    </div>
-  );
+  return <OrderDetailClient />;
 };
 
 export default OrderDetailsPage;
