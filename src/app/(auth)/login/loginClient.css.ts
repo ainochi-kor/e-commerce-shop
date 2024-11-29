@@ -45,6 +45,11 @@ const loginClientStyle = {
   buttonGroup: style({
     margin: "2rem 0",
   }),
+  headerImage: style({
+    display: "grid",
+    placeItems: "center",
+    marginBottom: 20,
+  }),
 };
 
 export default loginClientStyle;

@@ -16,6 +16,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { auth } from "@/firebase/firebase";
+import { style } from "@vanilla-extract/css";
 
 const LoginClient: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -62,7 +63,7 @@ const LoginClient: React.FC = () => {
       {isLoading && <Loading />}
       <section className={loginClientStyle.page}>
         <div>
-          <h1>
+          <h1 className={loginClientStyle.headerImage}>
             <Image
               src={"/images/colorful.svg"}
               alt="logo"
@@ -117,6 +118,7 @@ const LoginClient: React.FC = () => {
               <Button type="submit" width="100%">
                 로그인
               </Button>
+
               <Divider />
 
               <Link href={"/register"}>
@@ -125,7 +127,6 @@ const LoginClient: React.FC = () => {
                 </Button>
               </Link>
               <Divider />
-
               <div>
                 <Button onClick={signInWithGoogleLogin}>구글 로그인</Button>
               </div>
