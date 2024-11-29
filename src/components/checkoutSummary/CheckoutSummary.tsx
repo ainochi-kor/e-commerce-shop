@@ -1,7 +1,9 @@
-import React from "react";
+import React from 'react'
 
 const CheckoutSummary = () => {
-  return <div>CheckoutSummary</div>;
-};
+  return (
+    <div>CheckoutSummary</div>
+  )
+}
 
-export default CheckoutSummary;
+export default CheckoutSummary

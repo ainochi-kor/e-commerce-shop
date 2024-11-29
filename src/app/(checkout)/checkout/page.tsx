@@ -1,9 +1,8 @@
-import { NextPage } from "next";
-import React from "react";
-import CheckoutClient from "./CheckoutClient";
+import React from 'react'
+import CheckoutClient from './CheckoutClient'
 
-const CheckoutPage: NextPage = () => {
-  return <CheckoutClient />;
-};
+const Checkout = () => {
+  return <CheckoutClient />
+}
 
-export default CheckoutPage;
+export default Checkout

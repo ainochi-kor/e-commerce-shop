@@ -1,13 +1,16 @@
 "use client";
-import Button from "@/components/button/Button";
-import Input from "@/components/input/Input";
-import Loading from "@/components/loading/Loading";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import loginClientStyle from "./loginClient.css";
+
+import LogoPath from "@/assets/colorful.svg";
+import { useRouter } from "next/navigation";
+
+import styles from "./Auth.module.scss";
+import Loader from "@/components/loader/Loader";
+import Input from "@/components/Input/Input";
 import AutoSignInCheckbox from "@/components/autoSignInCheckbox/AutoSignInCheckbox";
 import Divider from "@/components/divider/Divider";
+import Button from "@/components/button/Button";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import {
@@ -17,7 +20,7 @@ import {
 } from "firebase/auth";
 import { auth } from "@/firebase/firebase";
 
-const LoginClient: React.FC = () => {
+const LoginClient = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -29,23 +32,24 @@ const LoginClient: React.FC = () => {
     router.push("/");
   };
 
-  const handleSubmitLoginUser = (e: React.FormEvent) => {
+  const loginUser = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    toast.info("성공!");
     setIsLoading(true);
+
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
+        setIsLoading(false);
         toast.success("로그인에 성공했습니다.");
         redirectUser();
       })
       .catch((error) => {
-        toast.error(error.message);
-      })
-      .finally(() => {
         setIsLoading(false);
+        toast.error(error.message);
       });
   };
 
-  const signInWithGoogleLogin = () => {
+  const signInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then((result) => {
@@ -59,21 +63,15 @@ const LoginClient: React.FC = () => {
 
   return (
     <>
-      {isLoading && <Loading />}
-      <section className={loginClientStyle.page}>
-        <div>
-          <h1>
-            <Image
-              src={"/images/colorful.svg"}
-              alt="logo"
-              width={246}
-              height={56}
-            />
+      {isLoading && <Loader />}
+      <section className={styles.page}>
+        <div className={styles.container}>
+          <h1 className={styles.logo}>
+            <Image priority src={LogoPath} alt="logo" />
           </h1>
-          <form
-            className={loginClientStyle.form}
-            onSubmit={handleSubmitLoginUser}
-          >
+
+          <form onSubmit={loginUser} className={styles.form}>
+            {/* Input */}
             <Input
               email
               icon="letter"
@@ -81,7 +79,7 @@ const LoginClient: React.FC = () => {
               name="email"
               label="이메일"
               placeholder="아이디(이메일)"
-              className={loginClientStyle.control}
+              className={styles.control}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -93,41 +91,53 @@ const LoginClient: React.FC = () => {
               name="password"
               label="비밀번호"
               placeholder="비밀번호"
-              className={loginClientStyle.control}
+              className={styles.control}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <div className={loginClientStyle.group}>
+            <div className={styles.group}>
+              {/* 자동 로그인, 비밀번호 수정 */}
               <AutoSignInCheckbox
                 checked={isAutoLogin}
                 onChange={(e) => setIsAutoLogin(e.target.checked)}
               />
-              <Link href={"/reset"} className={loginClientStyle.findLink}>
+
+              <Link href={"/reset"} className={styles.findLink}>
                 비밀번호 수정하기
-                <Image
-                  src={"images/arrow.svg"}
-                  alt="비밀번호 수정하기로 이동"
-                  width={11}
-                  height={18}
-                  className={loginClientStyle.findLinkArrow}
-                />
+                <svg
+                  width="11"
+                  height="18"
+                  viewBox="0 0 11 18"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className={styles.findLinkArrow}
+                >
+                  <path
+                    d="M1.5 1L9.5 9L1.5 17"
+                    stroke="#0074E9"
+                    strokeWidth="2"
+                  />
+                </svg>
               </Link>
             </div>
-            <div>
+
+            <div className={styles.buttonGroup}>
+              {/* Button */}
               <Button type="submit" width="100%">
                 로그인
               </Button>
+
               <Divider />
 
-              <Link href={"/register"}>
-                <Button secondary width="100%">
-                  회원가입
-                </Button>
-              </Link>
+              <Button width="100%" secondary>
+                <Link href={"/register"}>회원가입</Link>
+              </Button>
               <Divider />
 
               <div>
-                <Button onClick={signInWithGoogleLogin}>구글 로그인</Button>
+                {/* Button */}
+
+                <Button onClick={signInWithGoogle}>구글 로그인</Button>
               </div>
             </div>
           </form>

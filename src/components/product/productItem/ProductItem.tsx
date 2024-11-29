@@ -1,72 +1,79 @@
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
-import productItemStyle from "./ProductItem.css";
-import priceFormat from "@/utils/priceFormat";
-import { Rating } from "react-simple-star-rating";
-import { Product } from "@/types/products.type";
-import useFetchDocuments from "@/hooks/useFetchDocuments";
+'use client'
+import React from 'react'
+import styles from './ProductItem.module.scss';
+import Link from 'next/link';
+import Image from 'next/image';
+import priceFormat from '@/utils/priceFormat';
+import { Rating } from 'react-simple-star-rating';
+import rocketBadgeIcon from '@/assets/badge-rocket.svg';
+import useFetchDocuments from '@/hooks/useFetchDocuments';
 
-const ProductItem: React.FC<Product> = ({
-  id,
-  name,
-  price,
-  imageURL,
-  category,
-  brand,
-}) => {
-  const { documents } = useFetchDocuments("reviews", [
-    "productID",
-    "==",
-    id ?? "",
-  ]);
+interface IProductItemProps {
+  id: string;
+  name: string;
+  price: number;
+  imageURL: string;
+  category: string;
+  brand: string;
+}
 
-  const productRating = documents.reduce((sum, doc) => {
-    return sum + doc.rate;
-  }, 0);
 
-  const rating = productRating / documents.length;
+const ProductItem = ({ id, name, price, imageURL, category, brand }: IProductItemProps) => {
+
+  // const { documents } = useFetchDocuments('reviews', ["productID", "==", id])
+
+  // let productRating = 0;
+
+  // documents.map(doc => {
+  //   productRating = productRating + doc.rate;
+  // })
+
+  // const rating = productRating / documents.length;
+
 
   const shortenText = (text: string, n: number) => {
     if (text.length > n) {
-      const shortenedText = text.substring(0, n).concat("...");
-      return shortenedText;
+      const shortenedText = text.substring(0, n).concat('...');
+      return shortenedText
     }
     return text;
-  };
+  }
+
   return (
-    <div className={productItemStyle.grid}>
+    <div className={styles.grid}>
       <Link href={`/product-details/${id}`}>
-        <div className={productItemStyle.img}>
+        <div className={styles.img}>
           <Image src={imageURL} alt={name} width={265} height={265} />
         </div>
       </Link>
-      <div className={productItemStyle.content}>
-        <div className={productItemStyle.details}>
+      <div className={styles.content}>
+        <div className={styles.details}>
           <p>{shortenText(name, 10)}</p>
           <em>
-            <strong style={{ color: "#cb1400" }}>{priceFormat(price)}</strong>원{" "}
-            <Image
-              src={"/images/badge-rocket.svg"}
-              alt="로켓배송"
-              width={54}
-              height={14}
-            />
+            <strong
+              style={{ color: '#cb1400' }}
+            >
+              {priceFormat(price)}
+            </strong>원{" "}
+            <Image src={rocketBadgeIcon} alt='로켓배송' />
           </em>
-          <div className={productItemStyle.rating}>
+          <div className={styles.rating}>
             <Rating
               size={17}
               readonly
-              initialValue={Number.isNaN(rating) ? 0 : rating}
+              initialValue={1}
+            // initialValue={Number.isNaN(rating) ? 0 : rating}
             />
-            <span className={productItemStyle.ratingCount}>
-              ({documents.length})
+            <span className={styles.ratingCount}>
+              (1)
+              {/* ({documents.length}) */}
             </span>
           </div>
         </div>
       </div>
-    </div>
-  );
-};
 
-export default ProductItem;
+    </div>
+  )
+}
+
+export default ProductItem

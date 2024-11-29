@@ -1,33 +1,34 @@
-import classNames from "classnames";
-import React, { ButtonHTMLAttributes, PropsWithChildren } from "react";
-import buttonStyle from "./Bytton.css";
+import classNames from 'classnames'
+import React from 'react'
+import styles from './Button.module.scss';
 
-interface ButtonProps
-  extends PropsWithChildren,
-    ButtonHTMLAttributes<HTMLButtonElement> {
-  width?: number | string;
+interface IButtonProps {
+  type?: 'submit' | 'reset' | 'button' | undefined;
   secondary?: boolean;
   bgColor?: string;
   fgColor?: string;
+  width?: string;
+  [x: string]: any;
 }
 
-const Button: React.FC<ButtonProps> = ({
-  type = "button",
+const Button = ({
+  type = 'button',
   secondary = false,
   bgColor,
   fgColor,
   width,
   ...restProps
-}) => {
+}: IButtonProps) => {
+
   const composeClasses = classNames(
-    buttonStyle.button,
-    secondary ? buttonStyle.secondary : buttonStyle.primary
-  );
+    styles.button,
+    secondary ? styles.secondary : styles.primary
+  )
 
   const style = {
-    backgroundColor: bgColor || "",
-    color: fgColor || "",
-    width: width || "",
+    backgroundColor: bgColor || '',
+    color: fgColor || '',
+    width: width || '',
   };
 
   return (
@@ -37,7 +38,7 @@ const Button: React.FC<ButtonProps> = ({
       style={style}
       {...restProps}
     />
-  );
-};
+  )
+}
 
-export default Button;
+export default Button

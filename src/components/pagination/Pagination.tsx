@@ -1,19 +1,21 @@
-import React, { useState } from "react";
-import paginationStyle from "./Pagination.css";
+import React, { useState } from 'react'
+import styles from './Pagination.module.scss';
 
-interface PaginationProps {
+interface IPaginationProps {
   currentPage: number;
   productsPerPage: number;
   setCurrentPage: (page: number) => void;
   totalProducts: number;
 }
 
-const Pagination: React.FC<PaginationProps> = ({
+
+const Pagination = ({
   currentPage,
   productsPerPage,
   setCurrentPage,
-  totalProducts,
-}) => {
+  totalProducts
+}: IPaginationProps) => {
+
   const pageNumbers = [];
 
   const [pageNumberLimit] = useState(3);
@@ -22,7 +24,7 @@ const Pagination: React.FC<PaginationProps> = ({
 
   const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber);
-  };
+  }
 
   const paginateNextPage = () => {
     setCurrentPage(currentPage + 1);
@@ -31,7 +33,7 @@ const Pagination: React.FC<PaginationProps> = ({
       setMaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit);
       setMinPageNumberLimit(minPageNumberLimit + pageNumberLimit);
     }
-  };
+  }
 
   const paginatePrevPage = () => {
     setCurrentPage(currentPage - 1);
@@ -40,18 +42,17 @@ const Pagination: React.FC<PaginationProps> = ({
       setMaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
       setMinPageNumberLimit(minPageNumberLimit - pageNumberLimit);
     }
-  };
+  }
 
   for (let i = 1; i <= Math.ceil(totalProducts / productsPerPage); i++) {
     pageNumbers.push(i);
   }
+
   return (
-    <div className={paginationStyle.pagination}>
+    <div className={styles.pagination}>
       <li
         onClick={paginatePrevPage}
-        className={
-          currentPage === pageNumbers[0] ? `${paginationStyle.hidden}` : ""
-        }
+        className={currentPage === pageNumbers[0] ? `${styles.hidden}` : ''}
       >
         {"<"}
       </li>
@@ -62,13 +63,11 @@ const Pagination: React.FC<PaginationProps> = ({
             <li
               key={number}
               onClick={() => paginate(number)}
-              className={
-                currentPage === number ? `${paginationStyle.active}` : ""
-              }
+              className={currentPage === number ? `${styles.active}` : ''}
             >
               {number}
             </li>
-          );
+          )
         }
       })}
 
@@ -76,14 +75,14 @@ const Pagination: React.FC<PaginationProps> = ({
         onClick={paginateNextPage}
         className={
           currentPage === pageNumbers[pageNumbers.length - 1]
-            ? `${paginationStyle.hidden}`
-            : ""
+            ? `${styles.hidden}`
+            : ''
         }
       >
         {">"}
       </li>
     </div>
-  );
-};
+  )
+}
 
-export default Pagination;
+export default Pagination

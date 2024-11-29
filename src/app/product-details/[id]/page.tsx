@@ -1,17 +1,8 @@
-import { NextPage } from "next";
 import React from "react";
-import ProductDetailsClient from "../ProductDetailsClient";
+import ProductDetailsClient from "./ProductDetailsClient";
 
-interface ProductDetailsPageProps {
-  params: {
-    id: string;
-  };
-}
-
-const ProductDetailsPage: NextPage<ProductDetailsPageProps> = ({
-  params: { id },
-}) => {
+const ProductDetails = () => {
   return <ProductDetailsClient />;
 };
 
-export default ProductDetailsPage;
+export default ProductDetails;

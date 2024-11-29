@@ -1,9 +1,10 @@
-import { NextPage } from "next";
-import { useState } from "react";
-import RegisterClient from "./RegisterClient";
+import React from 'react'
+import RegisterClient from './RegisterClient'
 
-const RegisterPage: NextPage = () => {
-  return <RegisterClient />;
-};
+const Register = () => {
+  return (
+    <RegisterClient />
+  )
+}
 
-export default RegisterPage;
+export default Register

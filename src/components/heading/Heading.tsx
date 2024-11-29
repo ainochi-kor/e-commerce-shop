@@ -1,21 +1,30 @@
-import React from "react";
-import headingStyle from "./Heading.css";
+import React from 'react'
+import styles from './Heading.module.scss';
 
-interface HeadingProps {
+interface IHeadingProps {
   title: string;
   subtitle?: string;
   center?: boolean;
 }
 
-const Heading: React.FC<HeadingProps> = ({ title, subtitle, center }) => {
+
+const Heading = ({
+  title,
+  subtitle,
+  center
+}: IHeadingProps) => {
   return (
-    <div className={headingStyle.wrapper}>
-      <div className={center ? headingStyle.center : ""}>
-        <div className={headingStyle.title}>{title}</div>
-        <div className={headingStyle.subtitle}>{subtitle}</div>
+    <div className={styles.wrapper}>
+      <div className={center ? styles.center : ''}>
+        <div className={styles.title}>
+          {title}
+        </div>
+        <div className={styles.subtitle}>
+          {subtitle}
+        </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Heading;
+export default Heading

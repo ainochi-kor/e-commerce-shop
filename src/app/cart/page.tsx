@@ -1,9 +1,10 @@
-import { NextPage } from "next";
-import React from "react";
-import CartClient from "./CartClient";
+import React from 'react'
+import CartClient from './CartClient'
 
-const CartPage: NextPage = () => {
-  return <CartClient />;
-};
+const Cart = () => {
+  return (
+    <CartClient />
+  )
+}
 
-export default CartPage;
+export default Cart
