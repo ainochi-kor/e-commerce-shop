@@ -1,8 +1,10 @@
-import React from "react";
-import AddProductClient from "./AddProductClient";
+import React from 'react'
+import AddProductClient from './AddProductClient'
 
-const AddProductPage = () => {
-  return <AddProductClient />;
-};
+const AddProduct = () => {
+  return (
+    <AddProductClient />
+  )
+}
 
-export default AddProductPage;
+export default AddProduct

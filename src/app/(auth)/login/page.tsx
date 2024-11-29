@@ -1,9 +1,11 @@
-import { NextPage } from "next";
-import React, { useState } from "react";
-import LoginClient from "./LoginClient";
 
-const LoginPage: NextPage = () => {
-  return <LoginClient />;
-};
+import React from 'react'
+import LoginClient from './LoginClient';
 
-export default LoginPage;
+const Login = () => {
+  return (
+    <LoginClient />
+  )
+}
+
+export default Login

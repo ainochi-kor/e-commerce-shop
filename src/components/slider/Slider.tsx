@@ -1,63 +1,57 @@
-"use client";
+'use client'
+import React, { useCallback, useEffect, useState } from 'react'
+import sliderData from './SliderData';
+import styles from './Slider.module.scss';
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
+import Image from 'next/image';
 
-import SLIDER_DATA from "@/constants/sliderDate";
-import React, { useCallback, useEffect, useState } from "react";
-import sliderStyle from "./Slider.css";
-import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
-import Image from "next/image";
-import classNames from "classnames";
+const Slider = () => {
 
-const _intervalTime = 5000;
-
-const Slider: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const sliderLength = SLIDER_DATA.length;
+  const sliderLength = sliderData.length;
+
+  const intervalTime = 5000;
 
   const nextSlide = useCallback(() => {
     setCurrentSlide(currentSlide === sliderLength - 1 ? 0 : currentSlide + 1);
-  }, [currentSlide, sliderLength]);
+  }, [currentSlide, sliderLength])
+
   const prevSlide = useCallback(() => {
     setCurrentSlide(currentSlide === 0 ? sliderLength - 1 : currentSlide - 1);
-  }, [currentSlide, sliderLength]);
+  }, [currentSlide, sliderLength])
 
   useEffect(() => {
-    const interval = setInterval(nextSlide, _intervalTime);
-
+    const interval = setInterval(nextSlide, intervalTime)
     return () => {
-      clearInterval(interval);
-    };
-  }, [nextSlide]);
+      clearInterval(interval)
+    }
+  }, [nextSlide])
 
   return (
-    <div className={sliderStyle.slider}>
-      <AiOutlineArrowLeft
-        className={classNames(sliderStyle.arrow, sliderStyle.next)}
-        onClick={prevSlide}
-      />
-      <AiOutlineArrowRight
-        className={classNames(sliderStyle.arrow, sliderStyle.prev)}
-        onClick={nextSlide}
-      />
+    <div className={styles.slider}>
+      <AiOutlineArrowLeft className={`${styles.arrow} ${styles.prev}`} onClick={prevSlide} />
+      <AiOutlineArrowRight className={`${styles.arrow} ${styles.next}`} onClick={nextSlide}  />
 
-      {SLIDER_DATA.map((slider, index) => {
-        const { image, heading } = slider;
+      {sliderData.map((slider, index) => {
+
+        const { image, heading } = slider
+
         return (
           <div
             key={heading}
-            className={
-              index === currentSlide
-                ? classNames(sliderStyle.slide, sliderStyle.current)
-                : sliderStyle.slide
-            }
+            className={index === currentSlide ? `${styles.slide} ${styles.current}` : `${styles.slide}`}
           >
-            {index === currentSlide ? (
-              <Image src={image} alt={heading} fill />
-            ) : null}
+            {
+              index === currentSlide ?
+                <Image src={image} alt={heading} fill />
+                :
+                null
+            }
           </div>
-        );
+        )
       })}
     </div>
-  );
-};
+  )
+}
 
-export default Slider;
+export default Slider

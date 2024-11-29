@@ -1,31 +1,32 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent } from 'react'
 
-interface CheckboxProps {
-  label: string;
-  checked: boolean;
-  disabled?: boolean;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+interface ICheckboxProps {
+    disabled?: boolean;
+    checked?: boolean;
+    label: string;
+    onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    [x: string]: any;
 }
 
-const Checkbox: React.FC<CheckboxProps> = ({
-  label,
-  checked = false,
-  disabled = false,
-  onChange,
-  ...restProps
-}) => {
-  return (
-    <label style={{ fontSize: "1.4rem" }}>
-      <input
-        type="checkbox"
-        checked={checked}
-        disabled={disabled}
-        onChange={onChange}
-        {...restProps}
-      />{" "}
-      {label}
-    </label>
-  );
-};
+const Checkbox = ({
+    disabled = false,
+    checked = false,
+    label,
+    onChange,
+    ...restProps
+}: ICheckboxProps) => {
+    return (
+        <label style={{ fontSize: '1.4rem' }}>
+            <input
+                type="checkbox"
+                checked={checked}
+                disabled={disabled}
+                onChange={onChange}
+                {...restProps}
+            />{" "}
+            {label}
+        </label>
+    )
+}
 
-export default Checkbox;
+export default Checkbox

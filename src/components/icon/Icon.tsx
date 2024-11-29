@@ -1,21 +1,38 @@
-import Image from "next/image";
-import React from "react";
+import React from 'react'
 
-export type IconType = "letter" | "lock" | "show" | "hide";
+import letterPath from './images/shape=letter.svg';
+import lockPath from './images/shape=lock.svg';
+import showPath from './images/shape=show.svg';
+import hidePath from './images/shape=hide.svg';
+import Image from 'next/image';
 
-interface IconProps {
-  type?: IconType;
-  alt: string;
+interface IIconProps {
+  type: 'letter' | 'lock' | 'show' | 'hide';
+  alt?: string;
+  [x: string]: any;
 }
 
-const Icon: React.FC<IconProps> = ({ type, alt = "", ...restProps }) => {
-  const src = type ? `images/icon/shape=${type}.svg` : "";
+const Icon = ({ type, alt = '', ...restProps }: IIconProps) => {
+  let src = '';
 
-  if (!src) {
-    throw new Error("지원하는 아이콘 타입이 존재하지 않습니다.");
+  switch (type) {
+    case 'letter':
+      src = letterPath
+      break;
+    case 'lock':
+      src = lockPath
+      break;
+    case 'show':
+      src = showPath
+      break;
+    case 'hide':
+      src = hidePath
+      break;
+    default:
+      throw new Error('지원하는 아이콘 타입이 존재하지 않습니다.');
   }
 
-  return <Image src={src} alt={alt} width={45} height={50} {...restProps} />;
-};
+  return <Image src={src} alt={alt} {...restProps} />
+}
 
-export default Icon;
+export default Icon

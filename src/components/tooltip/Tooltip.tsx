@@ -1,66 +1,66 @@
-import classNames from "classnames";
-import React from "react";
-import tooltipStyle from "./Tooltip.css";
+import React from 'react'
+import styles from './Tooltip.module.scss';
+import classNames from 'classnames';
 
-export type Orientation = "top" | "right" | "bottom" | "left";
-
-interface TooltipProps {
+interface ITooltipProps {
   top?: number;
-  left?: number;
   right?: number;
   bottom?: number;
+  left?: number;
   color?: string;
   bgColor?: string;
-  orientation: Orientation;
+  orientation?: 'top' | 'right' | 'bottom' | 'left';
   message: string;
+  [x: string]: any;
 }
 
-const Tooltip: React.FC<TooltipProps> = ({
+
+const Tooltip = ({
   top = 0,
-  left = 0,
-  bottom = 0,
   right = 0,
-  color = "",
-  bgColor = "",
-  orientation = "top",
+  bottom = 0,
+  left = 0,
+  color = '',
+  bgColor = '',
+  orientation = 'top',
   message,
   ...restProps
-}) => {
-  const setOrientationClass = (type: Orientation) => {
+}: ITooltipProps) => {
+
+  const style = {
+    top,
+    right,
+    bottom,
+    left,
+    color,
+    backgroundColor: bgColor
+  }
+
+  const setOrientationClass = (type: string) => {
     switch (type) {
-      case "top":
-        return tooltipStyle.orientationTop;
-      case "right":
-        return tooltipStyle.orientationRight;
-      case "bottom":
-        return tooltipStyle.orientationBottom;
-      case "left":
-        return tooltipStyle.orientationLeft;
+      case 'top':
+        return styles.orientationTop
+      case 'right':
+        return styles.orientationRight
+      case 'bottom':
+        return styles.orientationBottom
+      case 'left':
+        return styles.orientationLeft
       default:
         break;
     }
-  };
+  }
 
   return (
     <span
       role="tooltip"
-      style={{
-        top,
-        left,
-        bottom,
-        right,
-        color,
-        backgroundColor: bgColor,
-      }}
-      className={classNames(
-        tooltipStyle.tooltip,
-        setOrientationClass(orientation)
-      )}
+      style={style}
+      className={classNames(styles.tooltip, setOrientationClass(orientation))}
       {...restProps}
     >
-      Tooltip
+      {message}
     </span>
-  );
-};
+  )
+}
 
-export default Tooltip;
+export default Tooltip

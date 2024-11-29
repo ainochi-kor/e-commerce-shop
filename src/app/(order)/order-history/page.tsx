@@ -1,9 +1,11 @@
-import { NextPage } from "next";
-import React from "react";
-import OrderHistoryClient from "./OrderHistoryClient";
+import React from 'react'
+import OrderHistoryClient from './OrderHistoryClient'
 
-const OrderHistoryPage: NextPage = () => {
-  return <OrderHistoryClient />;
-};
+const OrderHistory = () => {
+  return <OrderHistoryClient />
+}
 
-export default OrderHistoryPage;
+export default OrderHistory
+
+
+

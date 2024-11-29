@@ -1,29 +1,31 @@
-import classNames from "classnames";
-import React from "react";
-import dividerStyle from "./divider.css";
+import React from 'react'
+import styles from './Divider.module.scss';
 
-interface DividerProps {
+interface IDividerProps {
   space?: number;
   color?: string;
+  [x: string]: any;
 }
 
-const Divider: React.FC<DividerProps> = ({
+const Divider = ({
   space = 22,
-  color = "#ccc",
+  color = '#ccc',
   ...restProps
-}) => {
+}: IDividerProps) => {
+
+  const style = {
+    marginTop: space,
+    marginBottom: space,
+    background: color
+  }
+
   return (
     <div
-      role="presentation"
-      style={{
-        marginTop: space,
-        marginBottom: space,
-        background: color,
-      }}
-      className={dividerStyle.line}
+      className={styles.line}
+      style={style}
       {...restProps}
     />
-  );
-};
+  )
+}
 
-export default Divider;
+export default Divider
