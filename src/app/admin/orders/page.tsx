@@ -1,8 +1,8 @@
-import { NextPage } from "next";
-import React from "react";
+import React from 'react'
+import OrdersClient from './OrdersClient'
 
-const Orders: NextPage = () => {
-  return <div>Orders</div>;
-};
+const Orders = () => {
+    return <OrdersClient />
+}
 
-export default Orders;
+export default Orders

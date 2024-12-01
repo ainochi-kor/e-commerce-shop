@@ -1,8 +1,8 @@
-import { NextPage } from "next";
-import React from "react";
+import React from 'react'
+import DashboardClient from './DashboardClient'
 
-const DashboardPage: NextPage = () => {
-  return <div>DashboardPage</div>;
-};
+const Dashboard = () => {
+  return <DashboardClient />
+}
 
-export default DashboardPage;
+export default Dashboard

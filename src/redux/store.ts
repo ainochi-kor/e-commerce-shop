@@ -1,10 +1,10 @@
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import authReducer from "./slice/authSlice";
 import productReducer from "./slice/productSlice";
 import filterReducer from "./slice/filterSlice";
 import cartReducer from "./slice/cartSlice";
 import checkoutReducer from "./slice/checkoutSlice";
 import orderReducer from "./slice/orderSlice";
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -23,5 +23,6 @@ const store = configureStore({
     }),
 });
 
-export type ReduxState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<typeof store.getState>;
+
 export default store;

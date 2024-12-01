@@ -1,21 +1,22 @@
-import { CartItem } from "@/types/products.type";
+import { ICartItem } from "@/types";
 import { createSlice } from "@reduxjs/toolkit";
-import { stat } from "fs";
 import { toast } from "react-toastify";
-import { ReduxState } from "../store";
+import { RootState } from "../store";
 
-export interface CartState {
-  cartItems: CartItem[];
+interface ICartState {
+  cartItems: ICartItem[];
   cartTotalQuantity: number;
   cartTotalAmount: number;
   previousURL: string;
 }
 
-const cartItemsInLocal =
-  typeof window !== "undefined" ? localStorage.getItem("cartItems") : null;
-
-const initialState: CartState = {
-  cartItems: cartItemsInLocal ? JSON.parse(cartItemsInLocal) : [],
+const initialState: ICartState = {
+  cartItems:
+    typeof window !== "undefined"
+      ? localStorage.getItem("cartItems")
+        ? JSON.parse(localStorage.getItem("cartItems")!)
+        : []
+      : [],
   cartTotalQuantity: 0,
   cartTotalAmount: 0,
   previousURL: "",
@@ -23,21 +24,27 @@ const initialState: CartState = {
 
 const cartSlice = createSlice({
   name: "cart",
-  initialState: initialState,
+  initialState,
   reducers: {
     ADD_TO_CART: (state, action) => {
       const productIndex = state.cartItems.findIndex(
         (item) => item.id === action.payload.id
       );
-      const increaseCount = action.payload.quantity ?? 1;
+
+      const increaseCount = action.payload.quantity
+        ? action.payload.quantity
+        : 1;
+
       if (productIndex >= 0) {
         state.cartItems[productIndex].cartQuantity += increaseCount;
+
         toast.success(`${action.payload.name} 상품이 하나 추가되었습니다.`);
       } else {
         const tempProduct = { ...action.payload, cartQuantity: increaseCount };
         state.cartItems.push(tempProduct);
         toast.success(`${action.payload.name} 상품이 추가되었습니다.`);
       }
+
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
     CALCULATE_TOTAL_QUANTITY: (state) => {
@@ -49,8 +56,8 @@ const cartSlice = createSlice({
         return array.push(quantity);
       });
 
-      const totalQuantity = array.reduce((sum, value) => {
-        return sum + value;
+      const totalQuantity = array.reduce((a, b) => {
+        return a + b;
       }, 0);
 
       state.cartTotalQuantity = totalQuantity;
@@ -120,10 +127,10 @@ export const {
   SAVE_URL,
 } = cartSlice.actions;
 
-export const selectCartItems = (state: ReduxState) => state.cart.cartItems;
-export const selectCartTotalQuantity = (state: ReduxState) =>
+export const selectCartItems = (state: RootState) => state.cart.cartItems;
+export const selectCartTotalQuantity = (state: RootState) =>
   state.cart.cartTotalQuantity;
-export const selectCartTotalAmount = (state: ReduxState) =>
+export const selectCartTotalAmount = (state: RootState) =>
   state.cart.cartTotalAmount;
 
 export default cartSlice.reducer;
