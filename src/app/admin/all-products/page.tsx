@@ -1,8 +1,8 @@
-import { NextPage } from "next";
-import React from "react";
+import React from 'react'
+import AllProductsClient from './AllProductsClient'
 
-const AllProducts: NextPage = () => {
-  return <div>AllProducts</div>;
-};
+const AllProducts = () => {
+  return <AllProductsClient />
+}
 
-export default AllProducts;
+export default AllProducts
